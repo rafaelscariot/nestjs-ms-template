@@ -6,20 +6,20 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "start": "nest start",
     "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
     "test": "jest --detectOpenHandles --runInBand",
     "test:unit": "npm run test .*\\.unit.test\\.ts$",
     "test:e2e": "npm run test .*\\.e2e.test\\.ts$",
-    "migrate": "npm run build && typeorm migration:run -d dist/database/provider/datasource-options.provider.js",
-    "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
-    "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:cov": "jest --detectOpenHandles --runInBand --coverage",
+    "build": "nest build",
+    "migrate": "npm run build && typeorm migration:run -d dist/database/provider/datasource-options.provider.js",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
@@ -83,7 +83,7 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-      "**/*.(controller|service|repository).(t|j)s"
+      "**/*.(controller|service|repository).ts"
     ],
     "coverageDirectory": "./coverage",
     "testEnvironment": "node"

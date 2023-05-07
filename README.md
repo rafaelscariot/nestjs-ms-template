@@ -1,4 +1,4 @@
-API template with unit and e2e tests, ORM set to multiple databases, endpoint documentation with OpenAPI and migrations to populate the local databases.
+API template with unit and end to end tests, ORM set to multiple databases, endpoint documentation with OpenAPI and migrations to populate the local databases.
 
 Technologies used:
 - [Nest.js](https://nestjs.com/)
