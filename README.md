@@ -1,4 +1,4 @@
-API template with unit and end to end tests, ORM set to multiple databases, endpoint documentation with OpenAPI and migrations to populate the local databases.
+API template with unit and end to end tests, ORM set to multiple databases, endpoint documentation with OpenAPI, migrations and seed to populate the local databases.
 
 Technologies used:
 
