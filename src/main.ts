@@ -1,8 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
+  const logger = new Logger('src/main.ts');
+
   const app = await NestFactory.create(AppModule);
 
   const swaggerConfig = new DocumentBuilder()
@@ -22,7 +25,7 @@ async function bootstrap() {
   const PORT = process.env.NESTJS_PORT;
 
   await app.listen(Number(PORT), () => {
-    console.info(`Nest.js started at port ${PORT}`);
+    logger.log(`API running at port ${PORT}`);
   });
 }
 bootstrap();

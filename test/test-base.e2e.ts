@@ -4,41 +4,41 @@ import { AppModule } from '@src/app.module';
 import { getDataSourceToken } from '@nestjs/typeorm';
 import { ConnectionProviderEnum } from '@src/database/enum/connection-provider.enum';
 
-export abstract class BaseTest {
+export abstract class TestBaseE2E {
   static logger: Logger;
   static app: INestApplication;
   static httpServer: string;
 
   static async before(): Promise<void> {
-    BaseTest.logger = new Logger(BaseTest.name);
+    TestBaseE2E.logger = new Logger(TestBaseE2E.name);
 
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
 
-    BaseTest.app = moduleRef.createNestApplication();
-    BaseTest.app = await BaseTest.app.init();
-    BaseTest.httpServer = BaseTest.app.getHttpServer();
+    TestBaseE2E.app = moduleRef.createNestApplication();
+    TestBaseE2E.app = await TestBaseE2E.app.init();
+    TestBaseE2E.httpServer = TestBaseE2E.app.getHttpServer();
 
-    await BaseTest.clearDb();
+    await TestBaseE2E.clearDb();
   }
 
   async after(): Promise<void> {
-    await BaseTest.clearDb();
+    await TestBaseE2E.clearDb();
   }
 
   async afterAll() {
-    await BaseTest.app.close();
+    await TestBaseE2E.app.close();
   }
 
   static async clearDb(): Promise<void> {
     const connections = [
-      BaseTest.get(
+      TestBaseE2E.get(
         getDataSourceToken(
           ConnectionProviderEnum.POSTGRES_READ_CONNECTION,
         ) as string,
       ),
-      BaseTest.get(
+      TestBaseE2E.get(
         getDataSourceToken(
           ConnectionProviderEnum.POSTGRES_WRITE_CONNECTION,
         ) as string,
@@ -65,6 +65,6 @@ export abstract class BaseTest {
   static get<TInput = any, TResult = TInput>(
     type: Type<TInput> | string | symbol,
   ): TResult {
-    return BaseTest.app.get(type);
+    return TestBaseE2E.app.get(type);
   }
 }

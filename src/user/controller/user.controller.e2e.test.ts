@@ -1,15 +1,15 @@
 import * as request from 'supertest';
 import { suite, test } from '@testdeck/jest';
-import { BaseTest } from '@test/base-test';
+import { TestBaseE2E } from '@test/test-base.e2e';
 import { UserFactory } from '@test/factory/user.factory';
 import * as UserFixture from '@test/fixture/user.fixture.json';
 import { HttpStatus } from '@nestjs/common';
 
 @suite
-export class UserControllerE2ETest extends BaseTest {
+export class UserControllerE2ETest extends TestBaseE2E {
   @test
   async '[GET /user] If there are no users in the database, should return an empty array'() {
-    return request(BaseTest.httpServer)
+    return request(TestBaseE2E.httpServer)
       .get('/user')
       .expect(HttpStatus.OK)
       .expect([]);
@@ -19,7 +19,7 @@ export class UserControllerE2ETest extends BaseTest {
   async '[GET /user] Should return all the users in the database'() {
     await new UserFactory().createOne(UserFixture);
 
-    return request(BaseTest.httpServer)
+    return request(TestBaseE2E.httpServer)
       .get('/user')
       .expect(HttpStatus.OK)
       .expect([UserFixture]);
@@ -27,7 +27,7 @@ export class UserControllerE2ETest extends BaseTest {
 
   @test
   async '[POST /user] Given an user, should create it and return it'() {
-    return request(BaseTest.httpServer)
+    return request(TestBaseE2E.httpServer)
       .post('/user')
       .send(UserFixture)
       .expect(HttpStatus.CREATED)
@@ -38,7 +38,7 @@ export class UserControllerE2ETest extends BaseTest {
   async '[POST /user] Given an user that already exists, should return a bad request exception'() {
     await new UserFactory().createOne(UserFixture);
 
-    await request(BaseTest.httpServer)
+    await request(TestBaseE2E.httpServer)
       .post('/user')
       .send(UserFixture)
       .expect(HttpStatus.BAD_REQUEST);

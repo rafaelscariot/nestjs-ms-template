@@ -17,7 +17,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:cov": "jest --detectOpenHandles --runInBand --coverage",
     "build": "nest build",
-    "migrate": "npm run build && typeorm migration:run -d dist/database/provider/datasource-options.provider.js",
+    "migrate": "npm run build && typeorm migration:run -d dist/src/database/provider/datasource-options.provider.js",
+    "seed": "ts-node -r tsconfig-paths/register seed",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
   },
@@ -35,6 +36,7 @@
     "typeorm": "^0.3.15"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.0.0",
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.4.0",

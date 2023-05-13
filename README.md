@@ -1,6 +1,7 @@
 API template with unit and end to end tests, ORM set to multiple databases, endpoint documentation with OpenAPI and migrations to populate the local databases.
 
 Technologies used:
+
 - [Nest.js](https://nestjs.com/)
 - [TypeORM](https://typeorm.io/)
 - [Jest](https://jestjs.io/pt-BR/)
@@ -16,21 +17,28 @@ $ yarn install
 ## Running the app
 
 ```bash
-# containers
+# container
 $ docker-compose up -d
 
-# migrations
+# migration
 $ yarn migrate
 
-# watch mode
+# database seed
+$ yarn seed
+
+# start in watch mode
 $ yarn start:dev
 
-# production mode
+# start in production mode
 $ yarn start:prod
 ```
+
 Access the API docs on _localhost:3000/api_.
 
 ## Test
+
+All _controller_ have an end to end test covering all the request layers.
+All _service_ have a unit test covering the service logic and mocking external things to it.
 
 ```bash
 # all tests

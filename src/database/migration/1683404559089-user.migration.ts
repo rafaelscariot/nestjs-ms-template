@@ -15,11 +15,11 @@ export class User1683404559089 implements MigrationInterface {
           },
           {
             name: 'name',
-            type: 'varchar(20)',
+            type: 'varchar(100)',
           },
           {
             name: 'email',
-            type: 'varchar(20)',
+            type: 'varchar(100)',
           },
         ],
       }),
