@@ -19,8 +19,9 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "@src/*": ["./src/*"],
-      "@user/*": ["./src/user/*"],
       "@database/*": ["./src/database/*"],
+      "@auth/*": ["./src/auth/*"],
+      "@user/*": ["./src/user/*"],
       "@test/*": ["./test/*"]
     },
     "resolveJsonModule": true

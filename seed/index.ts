@@ -30,7 +30,7 @@ export class DatabaseSeed {
     this.logger.log('Saving 10 new users');
 
     const userRepository = this.connection.getRepository(UserEntity);
-    userRepository.save(this.createFakeUsers(10));
+    await userRepository.save(this.createFakeUsers(10));
 
     this.logger.log('The database has been seeded');
   }

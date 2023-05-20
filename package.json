@@ -76,8 +76,9 @@
     "rootDir": "./",
     "moduleNameMapper": {
       "@src/(.*)": "<rootDir>/src/$1",
-      "@user/(.*)": "<rootDir>/src/user/$1",
       "@database/(.*)": "<rootDir>/src/database/$1",
+      "@auth/(.*)": "<rootDir>/src/auth/$1",
+      "@user/(.*)": "<rootDir>/src/user/$1",
       "@test/(.*)": "<rootDir>/test/$1"
     },
     "testRegex": ".*\\.test\\.ts$",

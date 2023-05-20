@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { UserInterface } from '@user/interface/user.interface';
 import { CreateOneUserService } from '@user/service/create-one-user/create-one-user.service';
 import { FindAllUsersService } from '@user/service/find-all-users/find-all-users.service';
-import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiHeader, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('user')
 @Controller('user')
@@ -14,6 +14,7 @@ export class UserController {
 
   @Post()
   @ApiOperation({ summary: 'Create user' })
+  @ApiHeader({ name: 'Api-Key', required: true })
   @ApiBody({
     description: 'The user to create',
     schema: {
@@ -41,6 +42,7 @@ export class UserController {
 
   @Get()
   @ApiOperation({ summary: 'Find all users' })
+  @ApiHeader({ name: 'Api-Key', required: true })
   async findAll(): Promise<UserInterface[]> {
     return this.findAllUsersService.perform();
   }

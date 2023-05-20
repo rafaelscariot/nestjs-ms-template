@@ -2,11 +2,14 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Logger } from '@nestjs/common';
+import { AuthorizationGuard } from './auth/guard/authorization.guard';
 
 async function bootstrap() {
   const logger = new Logger('src/main.ts');
 
   const app = await NestFactory.create(AppModule);
+
+  app.useGlobalGuards(new AuthorizationGuard());
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Nest.js template')
@@ -28,4 +31,5 @@ async function bootstrap() {
     logger.log(`API running at port ${PORT}`);
   });
 }
+
 bootstrap();
