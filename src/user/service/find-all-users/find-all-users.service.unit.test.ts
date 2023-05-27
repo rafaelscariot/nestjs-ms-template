@@ -1,6 +1,6 @@
 import { suite, test } from '@testdeck/jest';
 import { FindAllUsersService } from './find-all-users.service';
-import * as UserFixture from '@test/fixture/user.fixture.json';
+import { userFixture } from '@test/fixture/user.fixture';
 
 @suite
 export class FindAllUsersServiceUnitTest {
@@ -9,7 +9,7 @@ export class FindAllUsersServiceUnitTest {
 
   async before() {
     this.userRepositoryMock = {
-      findAll: jest.fn().mockResolvedValue([UserFixture]),
+      findAll: jest.fn().mockResolvedValue([userFixture]),
     };
 
     // @ts-ignore
@@ -21,7 +21,7 @@ export class FindAllUsersServiceUnitTest {
     const result = await this.findAllUsersService.perform();
 
     expect(result).toHaveLength(1);
-    expect(result).toStrictEqual([UserFixture]);
+    expect(result).toStrictEqual([userFixture]);
   }
 
   @test

@@ -21,6 +21,15 @@ export class User1683404559089 implements MigrationInterface {
             name: 'email',
             type: 'varchar(100)',
           },
+          {
+            name: 'password',
+            type: 'varchar(100)',
+          },
+          {
+            name: 'role',
+            type: 'enum',
+            enum: ['admin', 'user'],
+          },
         ],
       }),
     );

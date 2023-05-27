@@ -4,15 +4,15 @@ import { UserInterface } from '@user/interface/user.interface';
 import { UserRepository } from '@user/repository/user.repository';
 
 @Injectable()
-export class CreateOneUserService {
+export class CreateUserService {
   constructor(private readonly userRepositoy: UserRepository) {}
 
-  async perform(data: UserInterface): Promise<UserInterface> {
+  async perform(data: UserInterface): Promise<void> {
     const userAlreadyExists = await this.userRepositoy.findByEmail(data.email);
 
     if (userAlreadyExists)
       throw new BadRequestException(UserErrorMessageEnum.USER_ALREADY_EXISTS);
 
-    return this.userRepositoy.createOne(data);
+    await this.userRepositoy.createOne(data);
   }
 }

@@ -7,7 +7,7 @@ export class AuthorizationGuard implements CanActivate {
 
   canActivate(context: ExecutionContext): boolean {
     const req = context.switchToHttp().getRequest();
-    const apiKey = req.headers['Api-Key'];
+    const apiKey = req.headers['api-key'];
     return apiKey === this.configService.get('API_KEY') ? true : false;
   }
 }

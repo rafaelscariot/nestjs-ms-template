@@ -21,7 +21,7 @@ export class UserRepository {
     return this.readRepository.findOneBy({ email });
   }
 
-  async createOne(data: UserInterface): Promise<UserEntity> {
-    return this.writeRepository.save(data);
+  async createOne(data: UserInterface): Promise<void> {
+    await this.writeRepository.save(data);
   }
 }

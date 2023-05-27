@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { UserController } from '@user/controller/user.controller';
 import { UserRepository } from '@user/repository/user.repository';
 import { FindAllUsersService } from '@user/service/find-all-users/find-all-users.service';
-import { CreateOneUserService } from './service/create-one-user/create-one-user.service';
+import { CreateUserService } from './service/create-user/create-user.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
   TypeOrmReadConnectionOptions,
@@ -31,6 +31,6 @@ import { ConnectionProviderEnum } from '@src/database/enum/connection-provider.e
     ),
   ],
   controllers: [UserController],
-  providers: [FindAllUsersService, CreateOneUserService, UserRepository],
+  providers: [FindAllUsersService, CreateUserService, UserRepository],
 })
 export class UserModule {}
