@@ -1,8 +1,8 @@
-import { ConnectionProviderEnum } from '@src/database/enum/connection-provider.enum';
-import { INestApplication, Type, Logger } from '@nestjs/common';
-import { getDataSourceToken } from '@nestjs/typeorm';
-import { AppModule } from '@src/app.module';
 import { Test } from '@nestjs/testing';
+import { AppModule } from '@src/app.module';
+import { getDataSourceToken } from '@nestjs/typeorm';
+import { INestApplication, Type, Logger } from '@nestjs/common';
+import { ConnectionProviderEnum } from '@src/database/enum/connection-provider.enum';
 
 export abstract class TestBaseE2E {
   static logger: Logger;

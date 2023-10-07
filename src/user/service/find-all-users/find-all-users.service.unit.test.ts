@@ -1,6 +1,6 @@
 import { suite, test } from '@testdeck/jest';
-import { FindAllUsersService } from './find-all-users.service';
 import { userFixture } from '@test/fixture/user.fixture';
+import { FindAllUsersService } from './find-all-users.service';
 
 @suite
 export class FindAllUsersServiceUnitTest {

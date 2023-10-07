@@ -30,6 +30,7 @@
     "@nestjs/swagger": "^6.3.0",
     "@nestjs/typeorm": "^9.0.1",
     "@testdeck/jest": "^0.3.3",
+    "class-validator": "^0.14.0",
     "pg": "^8.10.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",

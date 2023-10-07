@@ -1,11 +1,11 @@
-import { ConnectionProviderEnum } from '@src/database/enum/connection-provider.enum';
-import { DatabaseOperationEnum } from '@src/database/enum/database-operation.enum';
-import connectionProvider from '@src/database/provider/connection.provider';
-import { UserEntity } from '@src/database/entity/user.entity';
-import { UserRoleEnum } from '@src/user/enum/user-role.enum';
+import { DataSource } from 'typeorm';
 import { faker } from '@faker-js/faker';
 import { Logger } from '@nestjs/common';
-import { DataSource } from 'typeorm';
+import { UserRoleEnum } from '@src/user/enum/user-role.enum';
+import { UserEntity } from '@src/database/entity/user.entity';
+import connectionProvider from '@src/database/provider/connection.provider';
+import { DatabaseOperationEnum } from '@src/database/enum/database-operation.enum';
+import { ConnectionProviderEnum } from '@src/database/enum/connection-provider.enum';
 
 export class DatabaseSeed {
   private readonly logger = new Logger(DatabaseSeed.name);
@@ -47,7 +47,7 @@ export class DatabaseSeed {
       },
     );
 
-    const adminToCreate = faker.helpers.multiple(
+    const adminsToCreate = faker.helpers.multiple(
       () => {
         return {
           id: faker.string.uuid(),
@@ -66,7 +66,7 @@ export class DatabaseSeed {
 
     await Promise.all([
       userRepository.save(usersToCreate),
-      userRepository.save(adminToCreate),
+      userRepository.save(adminsToCreate),
     ]);
   }
 }

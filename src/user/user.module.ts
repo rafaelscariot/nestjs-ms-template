@@ -10,6 +10,7 @@ import {
 } from '@database/provider/typeorm-options.provider';
 import { UserEntity } from '@database/entity/user.entity';
 import { ConnectionProviderEnum } from '@src/database/enum/connection-provider.enum';
+import { FindUserByEmailService } from './service/find-user-by-email/find-user-by-email.service';
 
 @Module({
   imports: [
@@ -31,6 +32,11 @@ import { ConnectionProviderEnum } from '@src/database/enum/connection-provider.e
     ),
   ],
   controllers: [UserController],
-  providers: [FindAllUsersService, CreateUserService, UserRepository],
+  providers: [
+    UserRepository,
+    CreateUserService,
+    FindAllUsersService,
+    FindUserByEmailService,
+  ],
 })
 export class UserModule {}

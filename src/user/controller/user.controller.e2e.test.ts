@@ -1,9 +1,10 @@
 import * as request from 'supertest';
+import { HttpStatus } from '@nestjs/common';
 import { suite, test } from '@testdeck/jest';
 import { TestBaseE2E } from '@test/test-base.e2e';
+import { UserRoleEnum } from '../enum/user-role.enum';
 import { UserFactory } from '@test/factory/user.factory';
 import { userFixture } from '@test/fixture/user.fixture';
-import { HttpStatus } from '@nestjs/common';
 
 @suite
 export class UserControllerE2ETest extends TestBaseE2E {
@@ -47,6 +48,29 @@ export class UserControllerE2ETest extends TestBaseE2E {
     await request(TestBaseE2E.httpServer)
       .post('/user')
       .send(userFixture)
+      .expect(HttpStatus.BAD_REQUEST);
+  }
+
+  @test
+  async '[GET /user/:email] Given the email, should return the user'() {
+    await new UserFactory().createOne(userFixture);
+
+    const { body } = await request(TestBaseE2E.httpServer)
+      .get(`/user/${userFixture.email}`)
+      .expect(HttpStatus.OK);
+
+    expect(body).toStrictEqual({
+      id: '881a53dc-ed23-11ed-a05b-0242ac120003',
+      name: 'Adam Sandler',
+      email: 'adam@email.com',
+      role: UserRoleEnum.USER,
+    });
+  }
+
+  @test
+  async '[GET /user/:email] Given an email from a non-existent user, should return a BadRequestException'() {
+    await request(TestBaseE2E.httpServer)
+      .get('/user/zecapeta@hotmail.com')
       .expect(HttpStatus.BAD_REQUEST);
   }
 }

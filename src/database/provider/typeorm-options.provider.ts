@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import connection from '@src/database/provider/connection.provider';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import { DatabaseOperationEnum } from '@database/enum/database-operation.enum';
-import connection from '@src/database/provider/connection.provider';
 import { ConnectionProviderEnum } from '@src/database/enum/connection-provider.enum';
 
 @Injectable()
