@@ -8,7 +8,7 @@ import { userFixture } from '@test/fixture/user.fixture';
 @suite
 export class AuthControllerE2ETest extends TestBaseE2E {
   @test
-  async '[POST /auth] Given a valid user, should be authenticated'() {
+  async '[POST /auth] Given a valid user, it should be authenticated'() {
     await new UserFactory().createOne(userFixture);
 
     return request(TestBaseE2E.httpServer)
