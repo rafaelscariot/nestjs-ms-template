@@ -4,10 +4,6 @@ import { NestFactory } from '@nestjs/core';
 import { ApiKeyGuard } from './auth/guard/api-key.guard';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-// TODO usar dto excluindo dados que não devem ser retornados
-// TODO testes
-// TODO volumes no container do Postgres
-
 async function bootstrap() {
   const logger = new Logger('src/main.ts');
 

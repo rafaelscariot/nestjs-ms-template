@@ -1,7 +1,6 @@
 import {
   ApiBody,
   ApiTags,
-  ApiParam,
   ApiHeader,
   ApiOperation,
   ApiBearerAuth,
@@ -10,7 +9,6 @@ import {
   Get,
   Post,
   Body,
-  Param,
   HttpCode,
   UseGuards,
   HttpStatus,
@@ -21,7 +19,6 @@ import { UserInterface } from '@user/interface/user.interface';
 import { createUserSchema } from '@src/user/swagger/create-user.schema';
 import { CreateUserService } from '@src/user/service/create-user/create-user.service';
 import { FindAllUsersService } from '@user/service/find-all-users/find-all-users.service';
-import { FindUserByEmailService } from '../service/find-user-by-email/find-user-by-email.service';
 
 @ApiTags('user')
 @Controller('user')
@@ -29,7 +26,6 @@ export class UserController {
   constructor(
     private readonly createUserService: CreateUserService,
     private readonly findAllUsersService: FindAllUsersService,
-    private readonly findUserByEmailService: FindUserByEmailService,
   ) {}
 
   @UseGuards(AuthGuard)
@@ -56,17 +52,5 @@ export class UserController {
   @ApiHeader({ name: 'api-key', required: true })
   async findAll(): Promise<UserInterface[]> {
     return this.findAllUsersService.perform();
-  }
-
-  @UseGuards(AuthGuard)
-  @HttpCode(HttpStatus.OK)
-  @Get('/:email')
-  @ApiTags('user')
-  @ApiBearerAuth('jwt-auth')
-  @ApiOperation({ summary: 'Find user by email' })
-  @ApiHeader({ name: 'api-key', required: true })
-  @ApiParam({ name: 'email', required: true })
-  async findUserByEmail(@Param('email') email: string): Promise<UserInterface> {
-    return this.findUserByEmailService.perform(email);
   }
 }

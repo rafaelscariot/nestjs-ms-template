@@ -3,6 +3,8 @@ import { AppModule } from '@src/app.module';
 import { getDataSourceToken } from '@nestjs/typeorm';
 import { INestApplication, Type, Logger } from '@nestjs/common';
 import { ConnectionProviderEnum } from '@src/database/enum/connection-provider.enum';
+import { AuthGuard } from '@src/auth/guard/auth.guard';
+import { ExecutionContextHost } from '@nestjs/core/helpers/execution-context-host';
 
 export abstract class TestBaseE2E {
   static logger: Logger;
@@ -14,7 +16,14 @@ export abstract class TestBaseE2E {
 
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
-    }).compile();
+    })
+      .overrideGuard(AuthGuard)
+      .useValue({
+        canActivate: () => {
+          return true;
+        },
+      })
+      .compile();
 
     TestBaseE2E.app = moduleRef.createNestApplication();
     TestBaseE2E.app = await TestBaseE2E.app.init();

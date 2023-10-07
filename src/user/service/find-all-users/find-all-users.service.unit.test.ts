@@ -12,7 +12,6 @@ export class FindAllUsersServiceUnitTest {
       findAll: jest.fn().mockResolvedValue([userFixture]),
     };
 
-    // @ts-ignore
     this.findAllUsersService = new FindAllUsersService(this.userRepositoryMock);
   }
 

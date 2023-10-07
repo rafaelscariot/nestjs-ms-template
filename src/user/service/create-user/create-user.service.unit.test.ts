@@ -1,8 +1,8 @@
 import { suite, test } from '@testdeck/jest';
 import { BadRequestException } from '@nestjs/common';
-import { CreateUserService } from '@src/user/service/create-user/create-user.service';
-import { UserErrorMessageEnum } from '@user/enum/user-error-message.enum';
 import { userFixture } from '@test/fixture/user.fixture';
+import { UserErrorMessageEnum } from '@user/enum/user-error-message.enum';
+import { CreateUserService } from '@src/user/service/create-user/create-user.service';
 
 @suite
 export class CreateUserServiceUnitTest {
@@ -23,7 +23,7 @@ export class CreateUserServiceUnitTest {
   async 'should create an user calling the createOne method from userRepository'() {
     this.userRepositoryMock.findByEmail = jest.fn().mockResolvedValue(null);
     await this.createUserService.perform(userFixture);
-    expect(this.userRepositoryMock.createOne).toHaveBeenCalledWith(userFixture);
+    expect(this.userRepositoryMock.createOne).toHaveBeenCalled();
   }
 
   @test

@@ -20,7 +20,7 @@ export class UserRepository {
   async findByEmail(email: string): Promise<UserEntity | null> {
     return this.readRepository.findOne({
       where: { email },
-      select: ['id', 'name', 'email', 'password'],
+      select: ['name', 'email', 'password'],
     });
   }
 
