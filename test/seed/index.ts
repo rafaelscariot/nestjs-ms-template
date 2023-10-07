@@ -1,6 +1,8 @@
+import * as bcrypt from 'bcrypt';
 import { DataSource } from 'typeorm';
 import { faker } from '@faker-js/faker';
 import { Logger } from '@nestjs/common';
+import { userFixture } from '@test/fixture/user.fixture';
 import { UserRoleEnum } from '@src/user/enum/user-role.enum';
 import { UserEntity } from '@src/database/entity/user.entity';
 import connectionProvider from '@src/database/provider/connection.provider';
@@ -43,7 +45,7 @@ export class DatabaseSeed {
         };
       },
       {
-        count: 1,
+        count: 5,
       },
     );
 
@@ -58,9 +60,12 @@ export class DatabaseSeed {
         };
       },
       {
-        count: 1,
+        count: 5,
       },
     );
+
+    const encryptedPassword = await bcrypt.hash(userFixture.password, 10);
+    usersToCreate.push({ ...userFixture, password: encryptedPassword });
 
     const userRepository = this.connection.getRepository(UserEntity);
 

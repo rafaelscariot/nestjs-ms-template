@@ -1,8 +1,8 @@
-import { UserEntity } from '@database/entity/user.entity';
-import { Injectable } from '@nestjs/common';
-import { UserInterface } from '@user/interface/user.interface';
 import { Repository } from 'typeorm';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UserEntity } from '@database/entity/user.entity';
+import { UserInterface } from '@user/interface/user.interface';
 
 @Injectable()
 export class UserRepository {
@@ -14,11 +14,14 @@ export class UserRepository {
   ) {}
 
   async findAll(): Promise<UserEntity[]> {
-    return this.readRepository.find();
+    return this.readRepository.find({ select: ['name', 'email', 'role'] });
   }
 
   async findByEmail(email: string): Promise<UserEntity | null> {
-    return this.readRepository.findOneBy({ email });
+    return this.readRepository.findOne({
+      where: { email },
+      select: ['id', 'name', 'email', 'password'],
+    });
   }
 
   async createOne(data: UserInterface): Promise<void> {

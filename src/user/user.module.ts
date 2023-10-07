@@ -38,5 +38,6 @@ import { FindUserByEmailService } from './service/find-user-by-email/find-user-b
     FindAllUsersService,
     FindUserByEmailService,
   ],
+  exports: [FindUserByEmailService, UserRepository],
 })
 export class UserModule {}

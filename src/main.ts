@@ -1,21 +1,36 @@
 import { Logger } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { NestFactory } from '@nestjs/core';
+import { ApiKeyGuard } from './auth/guard/api-key.guard';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { AuthorizationGuard } from './auth/guard/authorization.guard';
+
+// TODO usar dto excluindo dados que não devem ser retornados
+// TODO testes
+// TODO volumes no container do Postgres
 
 async function bootstrap() {
   const logger = new Logger('src/main.ts');
 
   const app = await NestFactory.create(AppModule);
 
-  app.useGlobalGuards(new AuthorizationGuard());
+  app.useGlobalGuards(new ApiKeyGuard());
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Nest.js template')
     .setDescription('The Nest.js template description')
     .setVersion('1.0')
-    .addTag('user', 'user crud')
+    .addTag('auth')
+    .addTag('user')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'JWT',
+        in: 'header',
+      },
+      'jwt-auth',
+    )
     .build();
 
   const document = SwaggerModule.createDocument(app, swaggerConfig);

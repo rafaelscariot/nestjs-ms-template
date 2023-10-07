@@ -1,5 +1,5 @@
 import { suite, test } from '@testdeck/jest';
-import { BadRequestException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import { userFixture } from '@test/fixture/user.fixture';
 import { FindUserByEmailService } from './find-user-by-email.service';
 import { UserErrorMessageEnum } from '@src/user/enum/user-error-message.enum';
@@ -33,7 +33,7 @@ export class FindUserByEmailServiceUnitTest {
     const result = this.findUserByEmailService.perform('adam@email.com');
 
     await expect(result).rejects.toThrow(
-      new BadRequestException(UserErrorMessageEnum.USER_NOT_FOUND),
+      new NotFoundException(UserErrorMessageEnum.USER_NOT_FOUND),
     );
   }
 }

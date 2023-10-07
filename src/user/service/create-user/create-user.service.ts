@@ -1,7 +1,8 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
-import { UserErrorMessageEnum } from '@user/enum/user-error-message.enum';
+import * as bcrypt from 'bcrypt';
 import { UserInterface } from '@user/interface/user.interface';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { UserRepository } from '@user/repository/user.repository';
+import { UserErrorMessageEnum } from '@user/enum/user-error-message.enum';
 
 @Injectable()
 export class CreateUserService {
@@ -13,6 +14,11 @@ export class CreateUserService {
     if (userAlreadyExists)
       throw new BadRequestException(UserErrorMessageEnum.USER_ALREADY_EXISTS);
 
-    await this.userRepositoy.createOne(data);
+    const encryptedPassword = await bcrypt.hash(data.password, 10);
+
+    await this.userRepositoy.createOne({
+      ...data,
+      password: encryptedPassword,
+    });
   }
 }

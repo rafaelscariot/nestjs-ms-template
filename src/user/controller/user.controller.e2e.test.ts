@@ -71,6 +71,6 @@ export class UserControllerE2ETest extends TestBaseE2E {
   async '[GET /user/:email] Given an email from a non-existent user, should return a BadRequestException'() {
     await request(TestBaseE2E.httpServer)
       .get('/user/zecapeta@hotmail.com')
-      .expect(HttpStatus.BAD_REQUEST);
+      .expect(HttpStatus.NOT_FOUND);
   }
 }
