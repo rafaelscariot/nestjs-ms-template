@@ -17,6 +17,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:cov": "jest --detectOpenHandles --runInBand --coverage",
     "build": "nest build",
+    "db:create": "npm run migrate && npm run seed",
+    "db:reset": "npm run build && typeorm migration:revert -d dist/database/provider/datasource-options.provider.js",
     "migrate": "npm run build && typeorm migration:run -d dist/database/provider/datasource-options.provider.js",
     "seed": "ts-node -r tsconfig-paths/register test/seed/index.ts",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

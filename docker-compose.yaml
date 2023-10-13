@@ -8,3 +8,8 @@ services:
     restart: always
     env_file:
       - .env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:

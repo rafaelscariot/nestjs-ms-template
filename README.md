@@ -20,25 +20,40 @@ $ yarn install
 # container
 $ docker-compose up -d
 
-# migration
-$ yarn migrate
-
-# database seed
-$ yarn seed
+# migrations and seed
+$ yarn db:create
 
 # start in watch mode
 $ yarn start:dev
-
-# start in production mode
-$ yarn start:prod
 ```
 
 Access the API docs on _localhost:3000/api_.
 
-## Test
+## Other scripts
 
-All _controller_ have an end to end test covering all the request layers.
-All _service_ have a unit test covering the service logic and mocking external things to it.
+# start in production mode
+
+```bash
+$ yarn start:prod
+```
+
+# migrations and seed individually
+
+```bash
+$ yarn migrate
+$ yarn seed
+```
+
+# database reset
+
+```bash
+$ yarn db:reset
+```
+
+## Tests
+
+_controller_ have an end to end test covering all the request layers.
+_service_ have a unit test covering the service logic and mocking external things to it.
 
 ```bash
 # all tests

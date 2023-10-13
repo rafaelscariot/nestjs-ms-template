@@ -1,15 +1,14 @@
 import { Test } from '@nestjs/testing';
 import { AppModule } from '@src/app.module';
 import { getDataSourceToken } from '@nestjs/typeorm';
+import { AuthGuard } from '@src/auth/guard/auth.guard';
 import { INestApplication, Type, Logger } from '@nestjs/common';
 import { ConnectionProviderEnum } from '@src/database/enum/connection-provider.enum';
-import { AuthGuard } from '@src/auth/guard/auth.guard';
-import { ExecutionContextHost } from '@nestjs/core/helpers/execution-context-host';
 
 export abstract class TestBaseE2E {
   static logger: Logger;
-  static app: INestApplication;
   static httpServer: string;
+  static app: INestApplication;
 
   static async before(): Promise<void> {
     TestBaseE2E.logger = new Logger(TestBaseE2E.name);

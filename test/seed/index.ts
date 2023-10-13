@@ -64,6 +64,7 @@ export class DatabaseSeed {
       },
     );
 
+    // create a user to authenticate in local requests
     const encryptedPassword = await bcrypt.hash(userFixture.password, 10);
     usersToCreate.push({ ...userFixture, password: encryptedPassword });
 

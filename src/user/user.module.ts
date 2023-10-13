@@ -1,15 +1,15 @@
-import { Module } from '@nestjs/common';
-import { UserController } from '@user/controller/user.controller';
-import { UserRepository } from '@user/repository/user.repository';
-import { FindAllUsersService } from '@user/service/find-all-users/find-all-users.service';
-import { CreateUserService } from './service/create-user/create-user.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import {
   TypeOrmReadConnectionOptions,
   TypeOrmWriteConnectionOptions,
 } from '@database/provider/typeorm-options.provider';
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from '@database/entity/user.entity';
+import { UserController } from '@user/controller/user.controller';
+import { UserRepository } from '@user/repository/user.repository';
+import { CreateUserService } from './service/create-user/create-user.service';
 import { ConnectionProviderEnum } from '@src/database/enum/connection-provider.enum';
+import { FindAllUsersService } from '@user/service/find-all-users/find-all-users.service';
 import { FindUserByEmailService } from './service/find-user-by-email/find-user-by-email.service';
 
 @Module({
