@@ -1,4 +1,4 @@
-API template with unit and end to end tests, ORM set to multiple databases, endpoint documentation with OpenAPI, migrations and seed to populate the local databases, authorization with an API Key and authentication through Json Web Token.
+Microservice template with unit and integration tests, ORM set to multiple databases, endpoint documentation with OpenAPI, migrations and seed to populate the local databases, authorization with an API Key and authentication through Json Web Token.
 
 Technologies used:
 
